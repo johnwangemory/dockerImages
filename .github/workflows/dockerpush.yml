@@ -58,16 +58,14 @@ jobs:
           IMAGE_ID=docker.pkg.github.com/johnwangemory/image
           # IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
           # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          #VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
 
           # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          #[[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
           # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+          #[ "$VERSION" == "master" ] && VERSION=latest
 
-          echo IMAGE_ID=image
-          echo VERSION=1.0
-
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+        
+          docker tag image docker.pkg.github.com/johnwangemory/image:latest
+          docker push docker.pkg.github.com/johnwangemory/image:latest
